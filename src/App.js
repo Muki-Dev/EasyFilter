@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Filter from './components/Filter';
+import ItemList from './components/ItemList';
 import './App.css';
-
 function App() {
+  const [filter, setFilter] = useState("all");
+
+  const items = [
+    {id: 1, name: "Pomme", category: "fruit"},
+    {id: 2, name: "Carote", category: "legume"},
+    {id: 3, name: "Orange", category: "fruit"},
+    {id: 1, name: "Lait", category: "boisson"},
+  ]
+
+  const handleFilterChange = (category) => {
+    setFilter(category);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>EasyFilter</h1>
+      <Filter onFilterChange={handleFilterChange} />
+      <ItemList items={items} filter={filter} />
     </div>
   );
 }
